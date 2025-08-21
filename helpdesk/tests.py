@@ -10,8 +10,8 @@ class TicketAPITest(TestCase):
             title="Error de prueba",
             description="Pantalla azul",
             priority=Ticket.Priority.HIGH,
-            reporter_name="Tester",
-            reporter_email="tester@example.com",
+            reporter_name="Tester0",
+            reporter_email="tester0@gmail.com",
         )
 
     def test_create_ticket(self):
@@ -19,15 +19,14 @@ class TicketAPITest(TestCase):
             "title": "Nuevo ticket",
             "description": "Descripción del ticket",
             "priority": "media",
-            "reporter_name": "Juan",
-            "reporter_email": "juan@example.com",
+            "reporter_name": "Juan0",
+            "reporter_email": "juan0@gmail.com",
         }
         r = self.client.post("/api/tickets/", data, format="json")
         self.assertEqual(r.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Ticket.objects.count(), 2)
 
     def test_valid_transition(self):
-        # De 'nuevo' -> 'en_proceso' (válido)
         r = self.client.post(
             f"/api/tickets/{self.ticket.id}/transition/",
             {"next_status": "en_proceso"},
@@ -38,7 +37,6 @@ class TicketAPITest(TestCase):
         self.assertEqual(self.ticket.status, Ticket.Status.IN_PROGRESS)
 
     def test_invalid_transition(self):
-        # Intento 'nuevo' -> 'resuelto' (inválido)
         r = self.client.post(
             f"/api/tickets/{self.ticket.id}/transition/",
             {"next_status": "resuelto"},

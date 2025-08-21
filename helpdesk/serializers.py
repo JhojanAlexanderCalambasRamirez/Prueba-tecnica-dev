@@ -1,5 +1,3 @@
-# Crea aquí tus serializers para Ticket y Comment, y si deseas uno específico para transición de estado.
-
 from rest_framework import serializers
 from .models import Ticket, Comment
 

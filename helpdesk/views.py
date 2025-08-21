@@ -1,6 +1,3 @@
-# Implementa aquí tus ViewSets y endpoints (listar/crear tickets, transición, comentarios).
-# Puedes empezar con un endpoint placeholder si lo deseas.
-
 from rest_framework import viewsets, mixins, permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -15,12 +12,10 @@ class TicketViewSet(viewsets.ModelViewSet):
     serializer_class = TicketSerializer
     permission_classes = [permissions.AllowAny]
 
-    # Filtros y búsqueda (?status=...&priority=...&search=texto)
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_fields = ["status", "priority"]
     search_fields = ["title"]
 
-    # POST /api/tickets/{id}/transition/
     @action(detail=True, methods=["post"], url_path="transition")
     def transition(self, request, pk=None):
         ticket = self.get_object()
@@ -30,7 +25,6 @@ class TicketViewSet(viewsets.ModelViewSet):
         ticket.save(update_fields=["status", "updated_at"])
         return Response(TicketSerializer(ticket).data, status=status.HTTP_200_OK)
 
-    # POST /api/tickets/{id}/comments/
     @action(detail=True, methods=["post"], url_path="comments")
     def add_comment(self, request, pk=None):
         ticket = self.get_object()
