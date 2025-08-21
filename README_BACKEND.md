@@ -12,7 +12,7 @@ Primero ve a la carpeta del proyecto "Backend"
 
 cd backend
 
-- pip3 install -r requirements.txt
+- pip install -r requirements.txt
 
 Si tu sistema tiene múltiples versiones de Python, es mejor usar pip3 
 para asegurarte de que se instale en la versión correcta: 
@@ -32,6 +32,15 @@ posteriormente:
 Estando en la carpeta de "Backend"
 
 - python manage.py runserver
+
+- ADMIN: http://127.0.0.1:8000/admin/
+
+Para crear un usuario (admin)
+
+python manage.py createsuperuser
+
+Usuario: alexa (puede variar)
+contraseña: 246800. (puede variar)
 
 - API base en: http://127.0.0.1:8000/
 - Salud: http://127.0.0.1:8000/health/
